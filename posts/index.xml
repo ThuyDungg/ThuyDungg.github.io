@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
-    <link>http://example.org/posts/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <title>Posts on My Blog</title>
+    <link>https://thuydungg.github.io/posts/</link>
+    <description>Recent content in Posts on My Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 20 Apr 2020 16:20:17 +0700</lastBuildDate>
     
-	<atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://thuydungg.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Laravel Helper</title>
-      <link>http://example.org/posts/helper_laravel/</link>
+      <link>https://thuydungg.github.io/posts/helper_laravel/</link>
       <pubDate>Mon, 20 Apr 2020 16:20:17 +0700</pubDate>
       
-      <guid>http://example.org/posts/helper_laravel/</guid>
+      <guid>https://thuydungg.github.io/posts/helper_laravel/</guid>
       <description>Laravel cung cấp cho chúng ta rất nhiều function, những hàm global helper giúp chúng ta có thể gọi ở bất cứ đâu trong project. Nó giúp chúng ta thuận tiện hơn khi làm việc với arrays, object, paths&amp;hellip;và rất nhiều vấn đề khác nữa. Bài viết dưới đây sẽ giúp bạn có một cái nhìn tổng quan nhất về Helper trong Laravel.
 I. Các Method có sẵn 1. Arrays &amp;amp; Objects</description>
     </item>
     
     <item>
       <title>Hello World2</title>
-      <link>http://example.org/posts/hello-world2/</link>
+      <link>https://thuydungg.github.io/posts/hello-world2/</link>
       <pubDate>Mon, 13 Apr 2020 19:33:55 +0700</pubDate>
       
-      <guid>http://example.org/posts/hello-world2/</guid>
+      <guid>https://thuydungg.github.io/posts/hello-world2/</guid>
       <description></description>
     </item>
     
