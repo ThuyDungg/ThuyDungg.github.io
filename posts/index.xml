@@ -6,10 +6,20 @@
     <description>Recent content in Posts on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Apr 2020 19:33:55 +0700</lastBuildDate>
+    <lastBuildDate>Mon, 20 Apr 2020 16:20:17 +0700</lastBuildDate>
     
 	<atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Laravel Helper</title>
+      <link>http://example.org/posts/helper_laravel/</link>
+      <pubDate>Mon, 20 Apr 2020 16:20:17 +0700</pubDate>
+      
+      <guid>http://example.org/posts/helper_laravel/</guid>
+      <description>Laravel cung cấp cho chúng ta rất nhiều function, những hàm global helper giúp chúng ta có thể gọi ở bất cứ đâu trong project. Nó giúp chúng ta thuận tiện hơn khi làm việc với arrays, object, paths&amp;hellip;và rất nhiều vấn đề khác nữa. Bài viết dưới đây sẽ giúp bạn có một cái nhìn tổng quan nhất về Helper trong Laravel.
+I. Các Method có sẵn 1. Arrays &amp;amp; Objects</description>
+    </item>
     
     <item>
       <title>Hello World2</title>
@@ -17,17 +27,7 @@
       <pubDate>Mon, 13 Apr 2020 19:33:55 +0700</pubDate>
       
       <guid>http://example.org/posts/hello-world2/</guid>
-      <description>hiiiiiiiii</description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>http://example.org/posts/hello-world/</link>
-      <pubDate>Mon, 13 Apr 2020 19:14:49 +0700</pubDate>
-      
-      <guid>http://example.org/posts/hello-world/</guid>
-      <description>What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</description>
+      <description></description>
     </item>
     
   </channel>
