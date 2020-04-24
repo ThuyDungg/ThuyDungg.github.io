@@ -1,0 +1,240 @@
+---
+title: "Laravel Helper"
+date: 2020-04-20T16:20:17+07:00
+draft: false
+---
+Laravel cung cấp cho chúng ta rất nhiều function, những hàm global helper giúp chúng ta có thể gọi ở bất cứ đâu trong project. Nó giúp chúng ta thuận tiện hơn khi làm việc với arrays, object, paths...và rất nhiều vấn đề khác nữa. Bài viết dưới đây sẽ giúp bạn có một cái nhìn tổng quan nhất về Helper trong Laravel.   
+
+## I. Các Method có sẵn  
+**1. Arrays & Objects**  
+Trong nhóm này, helpers cung cấp khả năng làm việc với arrays và objects. Nhóm này bao gồm các helper function để thêm 2 mảng, thu gọn mảng đa chiều thành một mảng duy nhất và trả về phần tử đầu tiên của mảng, kiểm trả xem một item cụ thể hoặc item có tồn tại trong một mảng không và nhiều loại thao tác khác.  
+Ví dụ các method:  
+- *Arr::add()* Dùng để add thêm 1 cặp key/value đã cho vào trong 1 mảng, nếu key không tồn tại trong mảng hoặc là sẽ được set về null  
+```php3
+use Illuminate\Support\Arr;
+
+$array = Arr::add(['name' => 'Hoa'], 'age', 18);
+
+Kết quả => ['name' => 'Hoa', 'age' => 18]
+
+$array = Arr::add(['name' => 'Lan', 'age' => null], 'address', 'HN');
+
+Kết quả => ['name' => 'Lan', 'address' => 'HN']
+```  
+- *Arr::collapse()* Dùng để thu gọn các mảng thành một mảng duy nhất  
+```php3
+use Illuminate\Support\Arr;
+
+$array = Arr::collapse([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+
+Kết quả => [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```  
+- *Arr::divide()* Method trả về 2 mảng, một mảng chứa keys và mảng còn lại chứa giá trị của mảng: values  
+
+**2. Paths**  
+Nhóm này trả về các đường dẫn của các thư mục khác nhau trong Laravel application của bạn như: app, config, public, resource, storage..  
+- *app_path()* Dùng để trả về đường dẫn đầy đủ đến thư mục của bạn. Bạn cũng có thể sử dụng fucntion *app_path()* để tạo ra đường dẫn đến một tệp liên quan đến thư mục.  
+```
+$path = app_path();
+=> Kết quả: "/home/thuy.dung/Documents/laravel_study/app"
+```  
+Ngoài ra còn có *base_path()*, *config_path()*, *database_path()*, *public_path()*... Các bạn có thể tham khảo thêm tại [đây](https://laravel.com/docs/7.x/helpers#method-app-path)  
+
+**3. Strings**  
+Nhóm này thao tác với chuỗi, bạn có thể chuyển đổi từ string thành camel case, tìm kiếm basename của class, chạy htmlspecialchars, convert text sang kebab case, convert text sang snake case và thực hiện nhiều thao tác khác.  
+- *preg_replace_array()* Function này sẽ thay thế một string đã cho bằng cách sử dụng một mảng.  
+```
+$string = 'Day la mot bai hat :text';
+
+$replaced = preg_replace_array('/:[a-z_]+/', ['vui'], $string);
+
+Kết quả =>  Day la mot bai hat vui
+```  
+- *Str::after()* method sẽ trả về mọi thứ sau giá trị đã cho trong một chuỗi. Toàn bộ chuỗi sẽ được trả về nếu giá trị không tồn tại trong chuỗi (thứ 2)  
+```
+use Illuminate\Support\Str;
+
+$slice = Str::after('This is my love', 'This is');
+
+Kết quả => ' my love'
+```  
+- *Str::contains()* method xác định nếu chuỗi đã cho có chứa giá trị đã cho (Có phân biệt chữ hoa, chữ thường)  
+```
+use Illuminate\Support\Str;
+
+$contains = Str::contains('This is my name', 'my');
+
+Kết quả => true
+```  
+Ngoài ra còn rất nhiều method hỗ trợ khác, bạn có thể tham khảo tại [đây](https://laravel.com/docs/7.x/helpers#method-str-is)  
+
+**4. URLs**  
+Nhóm này hỗ trợ tạo URL. Bạn có thể tạo URL cho controller action, route name..  
+- *action()*  
+```
+$url = action('UserController@index');
+
+Kết quả => "http://127.0.0.1:8000/users"
+```  
+- *asset()*  
+```
+$url = asset('img/photo.jpg');
+```  
+Ngoài ra còn rất nhiều method hỗ trợ khác, bạn có thể tham khảo tại [đây](https://laravel.com/docs/7.x/helpers#urls)  
+
+**5. Miscellaneous**  
+Nhóm này hỗ trợ để làm việc với trạng thái của page, service container, authentication, cache...  
+- *app()* Trả về  1 service container instance  
+```
+$container = app();
+```  
+- *auth()* Trả về 1 authenticator instance, bạn có thể sử dụng nó thay vì Auth facade  
+```
+$user = auth()->user();
+```  
+- *back()* Tạo ra 1 redirect HTTP response (chuyển hướng) đến vị trí trước đó của user  
+```
+return back($status = 302, $headers = [], $fallback = false);
+
+return back();
+```  
+Ngoài ra còn rất nhiều method hỗ trợ khác, bạn có thể tham khảo tại [đây](https://laravel.com/docs/7.x/helpers#miscellaneous)  
+
+## II. Tự tạo Helper function trong Laravel 
+Laravel đã hỗ trợ chúng ta rất nhiều funtion, nhưng trong trường hợp nào đó, bạn muốn thêm các function khác để phù hợp hơn với project của mình, thì lúc đó bạn cũng có thể tự tạo cho mình những function cần thiết như dưới đây.   
+Trong phần này, chúng ta sẽ cùng nhau tạo một file Laravel helper để có thể sử dụng trên toàn bộ ứng dụng của bạn. Bạn có thể tùy chỉnh sắp xếp vị trí của helper file, tuy nhiên mình thích lưu giữ helper file trong forder *app/Helpers*  
+Bạn có thể đặt file helper ở bất cứ đâu trong ứng dụng của mình  
+Đầu tiên, hãy tạo forder Helpers trong forder app, sau đó tạo file Helper.php. Dưới đây là nội dung của file:  
+```
+<?php
+ 
+if (!function_exists('human_file_size')) {
+    /**
+     * Returns a human readable file size
+     *
+     * @param integer $bytes
+     * Bytes contains the size of the bytes to convert
+     *
+     * @param integer $decimals
+     * Number of decimal places to be returned
+     *
+     * @return string a string in human readable format
+     *
+     * */
+    function human_file_size($bytes, $decimals = 2)
+    {
+        $sz = 'BKMGTPE';
+        $factor = (int)floor((strlen($bytes) - 1) / 3);
+        return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . $sz[$factor];
+ 
+    }
+}
+ 
+if (!function_exists('in_arrayi')) {
+ 
+    /**
+     * Checks if a value exists in an array in a case-insensitive manner
+     *
+     * @param mixed $needle
+     * The searched value
+     *
+     * @param $haystack
+     * The array
+     *
+     * @param bool $strict [optional]
+     * If set to true type of needle will also be matched
+     *
+     * @return bool true if needle is found in the array,
+     * false otherwise
+     */
+    function in_arrayi($needle, $haystack, $strict = false)
+    {
+        return in_array(strtolower($needle), array_map('strtolower', $haystack), $strict);
+    }
+}
+```  
+Nếu bạn đang sử dụng một class và methods của nó là helper, bạn có thể start file với khai báo namespace  
+```
+namespace App\Helpers;
+```  
+Nếu bạn không sử dụng khai báo namespace, thì các  hàm này sẽ trở thành global có sẵn, bạn có thể sử dụng chúng mà không cần namespace. Tất cả các function helper của Laravel được khai báo với namespace. Ngoài ra, helper class cũng có sẵn, nên nếu bạn muốn sử dụng helper mà không cần đến namespace, bạn chỉ cần xóa dòng này  
+Có một vài cảnh báo khi khai báo function. Nên đặt tên các function khác nhau, tránh trường hợp bị conflict.  
+```
+if (!function_exists('human_file_size')) {
+    function human_file_size($bytes, $decimals = 2)
+    {
+        // ...
+    }
+}
+```  
+Nếu bạn bỏ qua case check này, việc conflict sẽ xảy ra bất cứ khi nào bạn khai báo lại function có cùng khai báo như thế này. Bạn có thể sử dụng hàm này hoặc có thể đặt tiền tố cho function name của mình, để tránh bị conflict.  
+Sau khi đã tạo file Helper và định nghĩa các hàm trong đó, chúng ta cùng tìm hiểu làm sao để sử dụng file helper trong Laravel nhé :  
+*- Tự động load file helper với composer. Sau đó có thể sử dụng những function helper bất cứ đâu trong ứng dụng của bạn.*  
+*- Sử dụng Laravel service provider để đăng ký file này. Laravel sẽ load file này cùng với những dependency khác.*  
+*- Sử dụng package*  
+Bây giờ thì đi tìm hiểu từng phần một nào!!  
+
+**1. Autoload với composer**  
+Cách đầu tiên này khá dễ dàng và đơn giản. Bạn chỉ cần mở file composer.json sẽ thấy key *autoload*. Composer có hỗ trợ key *files* (một mảng chứa đường dẫn file mà bạn muốn load một cách tự động). Sau đó bạn thêm đường dẫn file vào mảng đó, như thế này:  
+```
+ "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Helpers/Helper.php"
+        ],
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ]
+    },
+```  
+Sau đó chạy lệnh
+```
+composer dump-autoload
+```  
+Chạy lệnh này xong helper file của bạn sẽ được tự động load bên trong project.  
+
+**2. Sử dụng service providers**  
+Đầu tiên, bạn tạo một helper service provider nhé. Mở cmd ra và chạy dòng lệnh
+```
+php artisan make:provider HelperServiceProvider
+```
+Bạn sẽ nhìn thấy message logged ở màn hình
+```
+Provider created successfully.
+```
+Xong bạn hãy mở file đó ra và đăng kí helper file bên trong hàm register của provider: 
+```
+public function register()
+{
+    $file = app_path('Helpers/Helper.php');
+    if (file_exists($file)) {
+        require_once($file);
+    }
+}
+```
+Trong khi đăng kí các method, mình bao gồm các dependencies. Ở trong một số project lớn hơn, sẽ có trường hợp bạn cần sử dụng nhiều file helper trong thư mục, bạn có thể thay đổi các method giống như dưới đây  
+```
+public function register()
+{
+    foreach (glob(app_path() . '/Helpers/*.php') as $file) {
+        require_once($file);
+    }
+}
+```  
+Nó sẽ yêu cầu tất cả các file ở trong thư mục app/Helpers. Bây giờ thì tạo service provider đã hoàn thành, chúng ta cần đi đăng kí chúng. Bạn hãy mở file *config/app.php* và thêm dòng dưới đây
+```
+App\Providers\HelperServiceProvider::class,
+```
+Nếu file helper của bạn có class chứa những hàm helper và bạn có những namespace xác định, bạn có thể sử dụng dễ dàng bằng cách định nghĩa một alias . Bạn có thể làm điều đó bằng cách thêm dòng sau đây vào cuối mảng *aliases* trong *config/app.php* file:
+
+*'Helper' =&gt; App\Helpers\Helper::class*, Bằng cách này, bạn có thể gọi helper bằng cách sử dụng keyword Helper.  
+
+**3. Sử dụng package**  
+Với cách này bạn không cần làm gì cả. Chỉ đơn giản là cài package vào và dùng. Tuy nhiên mình không khuyến khích cách này nên sẽ không nói nhiều về nó. Các bạn có thể tham khảo tại [đây](https://github.com/laravel/helpers)  
+
+Tham khảo:  
+- [https://tutsforweb.com/](https://tutsforweb.com/creating-helpers-laravel/)  
+- [laravel.com](https://laravel.com/docs/7.x/helpers)
